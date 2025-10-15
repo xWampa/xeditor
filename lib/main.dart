@@ -6,6 +6,7 @@ import 'package:flutter_highlight/themes/monokai-sublime.dart';
 import 'package:highlight/languages/json.dart';
 import 'package:xeditor/settings_page.dart';
 import 'package:xeditor/base64_decoder_page.dart';
+import 'package:xeditor/http_header_page.dart';
 import 'package:clipboard/clipboard.dart';
 
 void main() {
@@ -35,10 +36,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   final _urlController = TextEditingController(
-      text:
-          'https://test-sd.cdn.sve.video.telefonicaservices.com/VoD/vod.svc/phone.android/environments/pre69/ws-directory');
+    text:
+        'https://test-sd.cdn.sve.video.telefonicaservices.com/VoD/vod.svc/phone.android/environments/pre69/ws-directory',
+  );
   String? _error;
   Map<String, TextStyle> _currentTheme = monokaiSublimeTheme;
+
+  // Platform dropdown variables
+  String _selectedPlatform = 'phone.android';
+  final List<String> _platforms = [
+    'phone.android',
+    'hisense',
+    'iphone.ios',
+    'appletv',
+    'webplayer',
+    'chromecast',
+  ];
 
   late final CodeController _codeController;
 
@@ -55,6 +68,16 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _currentTheme = theme;
     });
+  }
+
+  void _onPlatformChanged(String? newPlatform) {
+    if (newPlatform != null) {
+      setState(() {
+        _selectedPlatform = newPlatform;
+        _urlController.text =
+            'https://test-sd.cdn.sve.video.telefonicaservices.com/VoD/vod.svc/$newPlatform/environments/pre69/ws-directory';
+      });
+    }
   }
 
   void _validateJson() {
@@ -150,6 +173,10 @@ class _HomePageState extends State<HomePage> {
                 label: Text('Base64'),
               ),
               NavigationRailDestination(
+                icon: Icon(Icons.http),
+                label: Text('HTTP Header'),
+              ),
+              NavigationRailDestination(
                 icon: Icon(Icons.edit),
                 label: Text('Editor'),
               ),
@@ -165,6 +192,7 @@ class _HomePageState extends State<HomePage> {
               index: _selectedIndex,
               children: [
                 const Base64DecoderPage(),
+                const HttpHeaderPage(),
                 ListView(
                   children: [
                     Padding(
@@ -186,6 +214,26 @@ class _HomePageState extends State<HomePage> {
                               ElevatedButton(
                                 onPressed: _loadJsonFromUrl,
                                 child: const Text('Load from URL'),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              const Text('Platform: '),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: DropdownButton<String>(
+                                  value: _selectedPlatform,
+                                  isExpanded: true,
+                                  items: _platforms.map((String platform) {
+                                    return DropdownMenuItem<String>(
+                                      value: platform,
+                                      child: Text(platform),
+                                    );
+                                  }).toList(),
+                                  onChanged: _onPlatformChanged,
+                                ),
                               ),
                             ],
                           ),
