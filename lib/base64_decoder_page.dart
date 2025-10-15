@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Base64DecoderPage extends StatefulWidget {
   const Base64DecoderPage({super.key});
@@ -211,6 +212,158 @@ class _Base64DecoderPageState extends State<Base64DecoderPage> {
     });
   }
 
+  void _copyIpAddress() {
+    if (_ipAddress != null) {
+      Clipboard.setData(ClipboardData(text: _ipAddress!));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('IP Address copied to clipboard: $_ipAddress'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void _copyIssuer() {
+    if (_issuer != null) {
+      Clipboard.setData(ClipboardData(text: _issuer!));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Issuer copied to clipboard: $_issuer'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void _copyAccountId() {
+    if (_accountId != null) {
+      Clipboard.setData(ClipboardData(text: _accountId!));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Account ID copied to clipboard: $_accountId'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void _copyOpenPlatformId() {
+    if (_openPlatformId != null) {
+      Clipboard.setData(ClipboardData(text: _openPlatformId!));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'OpenPlatform ID copied to clipboard: $_openPlatformId',
+          ),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void _copyDeviceType() {
+    if (_deviceType != null) {
+      Clipboard.setData(ClipboardData(text: _deviceType!));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Device Type copied to clipboard: $_deviceType'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void _copyDeviceId() {
+    if (_deviceId != null) {
+      Clipboard.setData(ClipboardData(text: _deviceId!));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Device ID copied to clipboard: $_deviceId'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void _copyProfileId() {
+    if (_profileId != null) {
+      Clipboard.setData(ClipboardData(text: _profileId!));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Profile ID copied to clipboard: $_profileId'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void _copyCluster() {
+    if (_cluster != null) {
+      Clipboard.setData(ClipboardData(text: _cluster!));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Cluster copied to clipboard: $_cluster'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void _copyMaxStreams() {
+    if (_maxStreams != null) {
+      Clipboard.setData(ClipboardData(text: _maxStreams!));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Max Streams copied to clipboard: $_maxStreams'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void _copyMaxStreamsFueraDeCasa() {
+    if (_maxStreamsFueraDeCasa != null) {
+      Clipboard.setData(ClipboardData(text: _maxStreamsFueraDeCasa!));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Max Streams Fuera de casa copied to clipboard: $_maxStreamsFueraDeCasa',
+          ),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void _copyMaxPreferenteFueraDeCasa() {
+    if (_maxPreferenteFueraDeCasa != null) {
+      Clipboard.setData(ClipboardData(text: _maxPreferenteFueraDeCasa!));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Max Preferente Fuera de casa copied to clipboard: $_maxPreferenteFueraDeCasa',
+          ),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void _copyMaxNoPreferenteFueraDeCasa() {
+    if (_maxNoPreferenteFueraDeCasa != null) {
+      Clipboard.setData(ClipboardData(text: _maxNoPreferenteFueraDeCasa!));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Max noPreferente Fuera de casa copied to clipboard: $_maxNoPreferenteFueraDeCasa',
+          ),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
   @override
   void dispose() {
     _controller.removeListener(_decodeBase64);
@@ -244,10 +397,13 @@ class _Base64DecoderPageState extends State<Base64DecoderPage> {
                 spacing: 8.0,
                 runSpacing: 4.0,
                 children: [
-                  Chip(
-                    avatar: Icon(Icons.podcasts_outlined),
-                    label: Text('IP Address: $_ipAddress'),
-                    backgroundColor: Color(0xFF0B2C47),
+                  GestureDetector(
+                    onTap: _copyIpAddress,
+                    child: Chip(
+                      avatar: Icon(Icons.podcasts_outlined),
+                      label: Text('IP Address: $_ipAddress'),
+                      backgroundColor: Color(0xFF0B2C47),
+                    ),
                   ),
                 ],
               ),
@@ -261,10 +417,13 @@ class _Base64DecoderPageState extends State<Base64DecoderPage> {
                 spacing: 8.0,
                 runSpacing: 4.0,
                 children: [
-                  Chip(
-                    avatar: Icon(Icons.key),
-                    label: Text('Issuer: $_issuer'),
-                    backgroundColor: Color(0xFFA8530D),
+                  GestureDetector(
+                    onTap: _copyIssuer,
+                    child: Chip(
+                      avatar: Icon(Icons.key),
+                      label: Text('Issuer: $_issuer'),
+                      backgroundColor: Color(0xFFA8530D),
+                    ),
                   ),
                 ],
               ),
@@ -279,23 +438,29 @@ class _Base64DecoderPageState extends State<Base64DecoderPage> {
                 runSpacing: 4.0,
                 children: [
                   if (_accountId != null)
-                    Chip(
-                      avatar: Icon(Icons.account_circle),
-                      label: Text('Account ID: $_accountId'),
-                      backgroundColor: Color(
-                        0xFF2E7D32,
-                      ), // Green color for Account ID
+                    GestureDetector(
+                      onTap: _copyAccountId,
+                      child: Chip(
+                        avatar: Icon(Icons.account_circle),
+                        label: Text('Account ID: $_accountId'),
+                        backgroundColor: Color(
+                          0xFF2E7D32,
+                        ), // Green color for Account ID
+                      ),
                     ),
                   if (_openPlatformId != null)
-                    Chip(
-                      avatar: Icon(Icons.open_in_new),
-                      label: Text('OpenPlatform ID: $_openPlatformId'),
-                      backgroundColor: Color.fromARGB(
-                        255,
-                        0,
-                        87,
-                        99,
-                      ), // Cyan color for OpenPlatform ID
+                    GestureDetector(
+                      onTap: _copyOpenPlatformId,
+                      child: Chip(
+                        avatar: Icon(Icons.open_in_new),
+                        label: Text('OpenPlatform ID: $_openPlatformId'),
+                        backgroundColor: Color.fromARGB(
+                          255,
+                          0,
+                          87,
+                          99,
+                        ), // Cyan color for OpenPlatform ID
+                      ),
                     ),
                 ],
               ),
@@ -310,77 +475,26 @@ class _Base64DecoderPageState extends State<Base64DecoderPage> {
                 runSpacing: 4.0,
                 children: [
                   if (_deviceType != null)
-                    Chip(
-                      avatar: Icon(Icons.phone_android),
-                      label: Text('Device Type: $_deviceType'),
-                      backgroundColor: Color(
-                        0xFF6A1B9A,
-                      ), // Purple color for Device Type
+                    GestureDetector(
+                      onTap: _copyDeviceType,
+                      child: Chip(
+                        avatar: Icon(Icons.phone_android),
+                        label: Text('Device Type: $_deviceType'),
+                        backgroundColor: Color(
+                          0xFF6A1B9A,
+                        ), // Purple color for Device Type
+                      ),
                     ),
                   if (_deviceId != null)
-                    Chip(
-                      avatar: Icon(Icons.fingerprint),
-                      label: Text('Device ID: $_deviceId'),
-                      backgroundColor: Color(
-                        0xFF795548,
-                      ), // Brown color for Device ID
-                    ),
-                ],
-              ),
-            ),
-
-          //AQUI COMIENZAN LOS CHIPS STREAMING LIMITS (all in same row)
-          const SizedBox(height: 16),
-          if (_maxStreams != null ||
-              _maxStreamsFueraDeCasa != null ||
-              _maxPreferenteFueraDeCasa != null ||
-              _maxNoPreferenteFueraDeCasa != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Wrap(
-                spacing: 8.0,
-                runSpacing: 4.0,
-                children: [
-                  if (_maxStreams != null)
-                    Chip(
-                      avatar: Icon(Icons.play_circle_outline),
-                      label: Text('Max Streams: $_maxStreams'),
-                      backgroundColor: Color(
-                        0xFF1565C0,
-                      ), // Blue color for Max Streams
-                    ),
-                  if (_maxStreamsFueraDeCasa != null)
-                    Chip(
-                      avatar: Icon(Icons.home_work_outlined),
-                      label: Text(
-                        'Max Streams Fuera de casa: $_maxStreamsFueraDeCasa',
+                    GestureDetector(
+                      onTap: _copyDeviceId,
+                      child: Chip(
+                        avatar: Icon(Icons.fingerprint),
+                        label: Text('Device ID: $_deviceId'),
+                        backgroundColor: Color(
+                          0xFF795548,
+                        ), // Brown color for Device ID
                       ),
-                      backgroundColor: Color.fromARGB(
-                        255,
-                        143,
-                        50,
-                        0,
-                      ), // Orange color for Fuera de casa
-                    ),
-                  if (_maxPreferenteFueraDeCasa != null)
-                    Chip(
-                      avatar: Icon(Icons.star_outline),
-                      label: Text(
-                        'Max Preferente Fuera de casa: $_maxPreferenteFueraDeCasa',
-                      ),
-                      backgroundColor: Color(
-                        0xFF2E7D32,
-                      ), // Green color for Preferente
-                    ),
-                  if (_maxNoPreferenteFueraDeCasa != null)
-                    Chip(
-                      avatar: Icon(Icons.star_border),
-                      label: Text(
-                        'Max noPreferente Fuera de casa: $_maxNoPreferenteFueraDeCasa',
-                      ),
-                      backgroundColor: Color(
-                        0xFF8D6E63,
-                      ), // Brown color for noPreferente
                     ),
                 ],
               ),
@@ -395,20 +509,94 @@ class _Base64DecoderPageState extends State<Base64DecoderPage> {
                 runSpacing: 4.0,
                 children: [
                   if (_profileId != null)
-                    Chip(
-                      avatar: Icon(Icons.person_outline),
-                      label: Text('Profile ID: $_profileId'),
-                      backgroundColor: Color(
-                        0xFF4527A0,
-                      ), // Deep purple color for Profile ID
+                    GestureDetector(
+                      onTap: _copyProfileId,
+                      child: Chip(
+                        avatar: Icon(Icons.person_outline),
+                        label: Text('Profile ID: $_profileId'),
+                        backgroundColor: Color(
+                          0xFF4527A0,
+                        ), // Deep purple color for Profile ID
+                      ),
                     ),
                   if (_cluster != null)
-                    Chip(
-                      avatar: Icon(Icons.dns),
-                      label: Text('Cluster: $_cluster'),
-                      backgroundColor: Color(
-                        0xFF37474F,
-                      ), // Blue-grey color for Cluster
+                    GestureDetector(
+                      onTap: _copyCluster,
+                      child: Chip(
+                        avatar: Icon(Icons.dns),
+                        label: Text('Cluster: $_cluster'),
+                        backgroundColor: Color(
+                          0xFF37474F,
+                        ), // Blue-grey color for Cluster
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          //AQUI COMIENZAN LOS CHIPS STREAMING LIMITS (all in same row)
+          const SizedBox(height: 16),
+          if (_maxStreams != null ||
+              _maxStreamsFueraDeCasa != null ||
+              _maxPreferenteFueraDeCasa != null ||
+              _maxNoPreferenteFueraDeCasa != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Wrap(
+                spacing: 8.0,
+                runSpacing: 4.0,
+                children: [
+                  if (_maxStreams != null)
+                    GestureDetector(
+                      onTap: _copyMaxStreams,
+                      child: Chip(
+                        avatar: Icon(Icons.play_circle_outline),
+                        label: Text('Max Streams: $_maxStreams'),
+                        backgroundColor: Color(
+                          0xFF1565C0,
+                        ), // Blue color for Max Streams
+                      ),
+                    ),
+                  if (_maxStreamsFueraDeCasa != null)
+                    GestureDetector(
+                      onTap: _copyMaxStreamsFueraDeCasa,
+                      child: Chip(
+                        avatar: Icon(Icons.home_work_outlined),
+                        label: Text(
+                          'Max Streams Fuera de casa: $_maxStreamsFueraDeCasa',
+                        ),
+                        backgroundColor: Color.fromARGB(
+                          255,
+                          143,
+                          50,
+                          0,
+                        ), // Orange color for Fuera de casa
+                      ),
+                    ),
+                  if (_maxPreferenteFueraDeCasa != null)
+                    GestureDetector(
+                      onTap: _copyMaxPreferenteFueraDeCasa,
+                      child: Chip(
+                        avatar: Icon(Icons.star_outline),
+                        label: Text(
+                          'Max Preferente Fuera de casa: $_maxPreferenteFueraDeCasa',
+                        ),
+                        backgroundColor: Color(
+                          0xFF2E7D32,
+                        ), // Green color for Preferente
+                      ),
+                    ),
+                  if (_maxNoPreferenteFueraDeCasa != null)
+                    GestureDetector(
+                      onTap: _copyMaxNoPreferenteFueraDeCasa,
+                      child: Chip(
+                        avatar: Icon(Icons.star_border),
+                        label: Text(
+                          'Max noPreferente Fuera de casa: $_maxNoPreferenteFueraDeCasa',
+                        ),
+                        backgroundColor: Color(
+                          0xFF8D6E63,
+                        ), // Brown color for noPreferente
+                      ),
                     ),
                 ],
               ),
